@@ -2,3 +2,6 @@ requests
 PyYAML
 ollama
 tiktoken
+openai
+python-dotenv
+langsmith
