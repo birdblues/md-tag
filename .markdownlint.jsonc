@@ -1,0 +1,46 @@
+{
+  // markdownlint-cli2 설정 파일
+  // Frontmatter를 고려한 한국어 마크다운 린팅 설정
+  
+  // 기본 설정: 모든 규칙 활성화
+  "default": true,
+  
+  // 비활성화할 규칙들
+  "MD013": false,  // 라인 길이 제한 비활성화
+  "MD041": false,  // 첫 줄이 헤딩이 아니어도 됨 (frontmatter 때문에)
+  "MD034": false,  // 베어 URL 허용
+  "MD029": false,  // 헤딩에 공백 허용 (한국어 문서 관습)
+  "MD047": false,  // 강조 문법 대신 헤딩 사용 권고 (일부 완화)
+  
+  // 규칙별 세부 설정
+  "MD007": {
+    // 목록 들여쓰기 (한국어 문서 관습 고려)
+    "indent": 2
+  },
+  
+  "MD022": {
+    // 헤딩 주변 빈 줄 (frontmatter 바로 다음 헤딩 허용)
+    "lines_above": 1,
+    "lines_below": 1
+  },
+  
+  "MD024": {
+    // 중복 헤딩 허용 (형제 요소만 체크)
+    "siblings_only": true
+  },
+  
+  "MD025": {
+    // 최상위 헤딩 중복 허용 (frontmatter가 있을 때)
+    "front_matter_title": ""
+  },
+  
+  "MD033": {
+    // HTML 태그 일부 허용
+    "allowed_elements": ["br", "sub", "sup"]
+  },
+  
+  "MD036": {
+    // 강조 문법 대신 헤딩 사용 권고 (일부 완화)
+    "punctuation": ".,;:!?。，；：！？"
+  }
+}
