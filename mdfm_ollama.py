@@ -97,6 +97,13 @@ class MarkdownFixer:
 4. 일관된 포맷팅 적용
 5. 띄어쓰기, 오탈자 수정
 
+6. 테이블 구조 수정
+   - 헤더 행과 내용 행의 컬럼 수가 일치하도록 수정
+   - 비교 테이블에서 첫 번째 헤더 컬럼이 생략된 경우, 빈 컬럼(|)을 추가
+   - 구분자 행(---|---|---)의 컬럼 수를 실제 데이터 컬럼 수와 맞춤
+   - 예시: "| Vanilla RAG| Agentic RAG" → "| | Vanilla RAG| Agentic RAG"
+   - 예시: "---|---|---" (3개 컬럼)으로 구분자 수정
+
 수정된 마크다운만 반환하고, 다른 설명은 추가하지 마세요.
 원본의 의미와 내용은 변경하지 말고, 형식과 문법만 개선해주세요.
 frontmatter는 그대로 유지하세요."""
@@ -236,8 +243,7 @@ class MarkdownProcessor:
             
             # 출력 파일 경로 결정
             if output_path is None:
-                input_file = Path(input_path)
-                output_path = input_file.parent / f"{input_file.stem}_fix{input_file.suffix}"
+                output_path = input_path
             
             # 수정된 내용 저장
             with open(output_path, 'w', encoding='utf-8') as f:
@@ -281,7 +287,7 @@ def main():
         print("📋 사용법: python mdfm_ollama.py <파일경로> [모델명]")
         print("📝 예시: python mdfm_ollama.py tests/example.md")
         print("📝 모델 지정: python mdfm_ollama.py tests/example.md llama3.1:8b")
-        print("💾 출력: 파일명_fix.md 형태로 저장됩니다")
+        print("💾 출력: 원본 파일에 직접 저장됩니다")
         print("📊 주요 수정 사항: MD007(들여쓰기), MD032(목록 공백), MD022(헤딩 공백) 등")
         print()
         print("🔧 Ollama 설정:")
@@ -326,8 +332,7 @@ def main():
     success = processor.process_file(file_path)
     
     if success:
-        output_file = Path(file_path).parent / f"{Path(file_path).stem}_fix{Path(file_path).suffix}"
-        print(f"\n🎉 처리 완료! 수정된 파일: {output_file}")
+        print(f"\n🎉 처리 완료! 수정된 파일: {file_path}")
     else:
         print(f"\n❌ 파일 처리 중 오류가 발생했습니다.")
         sys.exit(1)
